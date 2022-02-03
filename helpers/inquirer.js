@@ -98,7 +98,13 @@ const choices = tareas.map((tarea, i) => {
    
     }
 
-})
+});
+
+choices.unshift({
+        value: '0',
+        name: '0. Cancelar'
+});
+
 const preguntas = {
     type: 'list',
     name: 'id',
@@ -108,16 +114,24 @@ const preguntas = {
 
     const { id } = await  inquirer.prompt(preguntas);
     return id;
-   //     {
-   //         value: '1',
-   //         name: `${'1.'.green} Crear Tarea`
-   //     },
 
+}
+
+const confirmar = async (message) => {
+    const question = {
+        type: 'confirm',
+        name: 'ok',
+        message
+    
+    }
+    const { ok } = await inquirer.prompt(question);
+    return ok;
 }
 
 module.exports = {
     inquirerMenu,
     pausa,
     leerInput,
-    listadoTareasBorrar
+    listadoTareasBorrar,
+    confirmar
 }
