@@ -1,1 +1,1 @@
-# el Readme de mi Control de tareas
+# Aprendiendo node js este es una aplicacion que permite guardar en un archivo JSON un listado de tareas, la plicacion permite ingresar nuevas tareas, listar las atreas, completar las tareas y borrar las tareas.
