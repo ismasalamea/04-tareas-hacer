@@ -8,7 +8,8 @@ class Tareas {
     
     _listado = {};
     
-    get listadoArr(){
+    get listadoArr()
+    {
         const listado = [];
         Object.keys(this._listado).forEach( key => {
             const tarea = this._listado[key];
@@ -17,33 +18,37 @@ class Tareas {
         return listado;
     }
 
-    constructor () {
+    constructor ()
+    {
         this._listado = {};
     }
 
 
-    borrarTarea(id = ''){
+    borrarTarea(id = '')
+    {
         if(this._listado[id]) {
             delete this._listado[id]
         }
     }
 
-    cargarTareasFromArray(tareas = []){
+    cargarTareasFromArray(tareas = [])
+    {
         tareas.forEach ( tarea => {
             this._listado [tarea.id] = tarea;
         });
     
     }
 
-    crearTarea(desc = '' ){
+    crearTarea(desc = '' )
+    {
         
         const tarea = new Tarea(desc);
         this._listado[tarea.id] = tarea;
     }
 
-    listadoCompleto() {
+    listadoCompleto() 
+    {
         //1. TAREA :: Completada en verde | Pendiente en rojo
-  //      console.log (this._listado);
         this.listadoArr.forEach((tarea, i) => {
             const idx = `${i + 1}`.green;
             const { desc, completadoEn } = tarea
@@ -54,7 +59,9 @@ class Tareas {
         })
     }
 
-    listarPendientesCompletadas ( completadas = true ) {
+    listarPendientesCompletadas ( completadas = true ) 
+    {
+        //Lista todas las tareas completadas o no
         let contador = 0;
         this.listadoArr.forEach(tarea => {
             const { desc, completadoEn } = tarea
@@ -80,23 +87,24 @@ class Tareas {
 
 
 
-toggleCompletadas(ids = []) {
-    
-    ids.forEach( id => {
+    toggleCompletadas(ids = [])
+    {
+        //Completar tareas con fecha o las no seleccionadas se pone null
+        ids.forEach( id => {
 
-        const tarea = this._listado[id];
-        if (!tarea.completadoEn){
-            tarea.completadoEn = new Date().toISOString()
-        }
-    });
+            const tarea = this._listado[id];
+            if (!tarea.completadoEn){
+                tarea.completadoEn = new Date().toISOString()
+            }
+        });
 
-    this.listadoArr.forEach( tarea => {
-        if (!ids.includes(tarea.id)) {
-            this._listado[tarea.id].completadoEn = null;
-        }
-    })
+        this.listadoArr.forEach( tarea => {
+            if (!ids.includes(tarea.id)) {
+                this._listado[tarea.id].completadoEn = null;
+            }
+        })
 
-}
+    }
 
 };
 

@@ -77,41 +77,34 @@ const leerInput = async(message) => {
                 }
                 return true;
         }
-    }
+        }
     ];
-
-const { desc } = await inquirer.prompt(question);
-return desc;
-
+    const { desc } = await inquirer.prompt(question);
+    return desc;
 }
 
 const listadoTareasBorrar = async(tareas = [] ) => {
 
-const choices = tareas.map((tarea, i) => {
-   
-    const idx = `${ i + 1 }.`.green;
-   
-    return {
-   
-        value: tarea.id,
-        name: `${idx} ${ tarea.desc }`
-   
-    }
-
-});
-
-choices.unshift({
+    const choices = tareas.map((tarea, i) => {
+        const idx = `${ i + 1 }.`.green;
+        return {
+            value: tarea.id,
+            name: `${idx} ${ tarea.desc }`
+        }
+    });
+    //agregar previamente un valor de 0 al choices
+    choices.unshift({
         value: '0',
         name: '0. Cancelar'
-});
+    });
 
-const preguntas = {
-    type: 'list',
-    name: 'id',
-    message: 'Borrar',
-    choices
-}
-
+    const preguntas = {
+        type: 'list',
+        name: 'id',
+        message: 'Borrar',
+        choices
+    }
+    
     const { id } = await  inquirer.prompt(preguntas);
     return id;
 
